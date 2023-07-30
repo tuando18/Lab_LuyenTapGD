@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/menu_danhba"
+        android:title="Danh bạ"
+        android:icon="@drawable/ic_phone"/>
+
+    <item
+        android:id="@+id/menu_maytinh"
+        android:title="Máy tính"
+        android:icon="@drawable/ic_pc"/>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Hệ thống">
+            <menu>
+                <item
+                    android:id="@+id/mnu_setting"
+                    android:title="Cài đặt"
+                    android:icon="@drawable/ic_setting"/>
+                <item
+                    android:id="@+id/mnu_backup"
+                    android:title="Backup"
+                    android:icon="@drawable/ic_backup"/>
+            </menu>
+        </item>
+    </group>
+</menu>
+
