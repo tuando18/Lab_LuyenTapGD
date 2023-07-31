@@ -18,69 +18,67 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    DrawerLayout layout_chinh_drawer;
-    Toolbar mToolbarr;
-    NavigationView main_navigation_view;
+    DrawerLayout layout_chinh_drawer001;
+    Toolbar mToolbar;
+    NavigationView main_navigation_view001;
+    FragmentManager sm;
+
     Frag_TinTuc frag01;
     Frag_ThoiTiet frag02;
 
     BottomNavigationView bottom_nav;
-    FragmentManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottom);
-
-        layout_chinh_drawer = findViewById(R.id.layout_chinh_drawer002);
-        mToolbarr = findViewById(R.id.mToolbarr);
-        main_navigation_view = findViewById(R.id.main_navigation_view002);
+        setContentView(R.layout.activity_main);
+        // ánh xạ
+        layout_chinh_drawer001 = findViewById(R.id.layout_chinh_drawer001);
+        mToolbar = findViewById(R.id.mToolbar1);
+        main_navigation_view001 = findViewById(R.id.main_navigation_view001);
 
         bottom_nav = findViewById(R.id.buttom_nav);
+        // hiển thị actionbar:
+        setSupportActionBar(mToolbar);
 
-        setSupportActionBar(mToolbarr);
-
-
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, layout_chinh_drawer, mToolbarr, R.string.open, R.string.close);
+        // hiển thị toggle nav
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, layout_chinh_drawer001, mToolbar, R.string.open, R.string.close);
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerToggle.syncState();
-        layout_chinh_drawer.addDrawerListener(drawerToggle);
+        layout_chinh_drawer001.addDrawerListener(drawerToggle);
 
         frag01 = new Frag_TinTuc();
         frag02 = new Frag_ThoiTiet();
 
-        sm = getSupportFragmentManager();
-        sm.beginTransaction().add(R.id.frag_container002, frag01).commit();
+        sm  =getSupportFragmentManager();
+        sm.beginTransaction().add(R.id.frag_container001,frag01).commit();
 
-        main_navigation_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        main_navigation_view001.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.mnu_tintuc) {
-                    sm.beginTransaction().replace(R.id.frag_container002, frag01).commit();
-
-                } else if (item.getItemId() == R.id.mnu_thoitiet) {
-                    sm.beginTransaction().replace(R.id.frag_container002, frag02).commit();
+                if (item.getItemId() == R.id.menu_danhba) {
+                    sm.beginTransaction().replace(R.id.frag_container001, frag01).commit();
+                } else if (item.getItemId() == R.id.menu_maytinh) {
+                    sm.beginTransaction().replace(R.id.frag_container001, frag02).commit();
                 }
                 getSupportActionBar().setTitle(item.getTitle());
-                layout_chinh_drawer.close();
+                layout_chinh_drawer001.close();
                 return true;
             }
         });
 
-        /// bottom nav
         bottom_nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.mnu_tintuc) {
-                    sm.beginTransaction().replace(R.id.frag_container002, frag01).commit();
+                    sm.beginTransaction().replace(R.id.frag_container001, frag01).commit();
 
                 } else if (item.getItemId() == R.id.mnu_thoitiet) {
-                    sm.beginTransaction().replace(R.id.frag_container002, frag02).commit();
+                    sm.beginTransaction().replace(R.id.frag_container001, frag02).commit();
                 }
                 getSupportActionBar().setTitle(item.getTitle());
                 return true;
             }
         });
-
     }
 }
