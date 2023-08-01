@@ -1,5 +1,7 @@
 package com.dovantuan.lab_luyentapgd;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,9 +9,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.dovantuan.lab_luyentapgd.Fragments.Frag_Backup;
 import com.dovantuan.lab_luyentapgd.Fragments.Frag_DanhBa;
 import com.dovantuan.lab_luyentapgd.Fragments.Frag_ThoiTiet;
 import com.dovantuan.lab_luyentapgd.Fragments.Frag_TinTuc;
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     Frag_ThoiTiet frag02;
 
     Frag_DanhBa frag03;
+
+    Frag_Backup frag04;
 
     BottomNavigationView bottom_nav;
 
@@ -53,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         frag01 = new Frag_TinTuc();
         frag02 = new Frag_ThoiTiet();
         frag03 = new Frag_DanhBa();
+        frag04 = new Frag_Backup();
 
         sm = getSupportFragmentManager();
         sm.beginTransaction().add(R.id.frag_container001, frag01).commit();
@@ -60,10 +69,33 @@ public class MainActivity extends AppCompatActivity {
         main_navigation_view001.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.menu_danhba) {
-                    sm.beginTransaction().replace(R.id.frag_container001, frag03).commit();
+                if (item.getItemId() == R.id.home) {
+                    sm.beginTransaction().replace(R.id.frag_container001, frag01).commit();
                 } else if (item.getItemId() == R.id.menu_maytinh) {
                     sm.beginTransaction().replace(R.id.frag_container001, frag02).commit();
+                } else if (item.getItemId() == R.id.menu_danhba) {
+                    sm.beginTransaction().replace(R.id.frag_container001, frag03).commit();
+                } else if (item.getItemId() == R.id.mnu_backup) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Thong Bao");
+                    builder.setIcon(android.R.drawable.ic_delete);
+                    builder.setMessage("Ban Co Dong Y Goi Activity Moi Khong ?");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Dong Y ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(MainActivity.this, BackUpActivity.class));
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Khong Dong Y", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 getSupportActionBar().setTitle(item.getTitle());
                 layout_chinh_drawer001.close();

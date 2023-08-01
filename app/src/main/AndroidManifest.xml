@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Lab_LuyenTapGD"
         tools:targetApi="31">
         <activity
+            android:name=".BackUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".Fragments.Frag_ThoiTiet"
             android:exported="false" />
         <activity
