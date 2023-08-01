@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 getSupportActionBar().setTitle(item.getTitle());
                 layout_chinh_drawer001.close();
+
                 return true;
             }
         });
