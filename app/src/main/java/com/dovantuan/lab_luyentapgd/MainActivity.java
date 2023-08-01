@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.dovantuan.lab_luyentapgd.Fragments.Frag_DanhBa;
 import com.dovantuan.lab_luyentapgd.Fragments.Frag_ThoiTiet;
 import com.dovantuan.lab_luyentapgd.Fragments.Frag_TinTuc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     Frag_TinTuc frag01;
     Frag_ThoiTiet frag02;
+
+    Frag_DanhBa frag03;
 
     BottomNavigationView bottom_nav;
 
@@ -49,15 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         frag01 = new Frag_TinTuc();
         frag02 = new Frag_ThoiTiet();
+        frag03 = new Frag_DanhBa();
 
-        sm  =getSupportFragmentManager();
-        sm.beginTransaction().add(R.id.frag_container001,frag01).commit();
+        sm = getSupportFragmentManager();
+        sm.beginTransaction().add(R.id.frag_container001, frag01).commit();
 
         main_navigation_view001.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_danhba) {
-                    sm.beginTransaction().replace(R.id.frag_container001, frag01).commit();
+                    sm.beginTransaction().replace(R.id.frag_container001, frag03).commit();
                 } else if (item.getItemId() == R.id.menu_maytinh) {
                     sm.beginTransaction().replace(R.id.frag_container001, frag02).commit();
                 }
